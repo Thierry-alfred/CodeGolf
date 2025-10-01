@@ -12,13 +12,16 @@ namespace GolfCode
         {
             if(e.KeyValue == (char)Keys.Enter)
             {
-                var service = new AnalyseurValidChaineService();
                 string chaine = txtChaine.Text;
-                if (service.AnalyseValidChaine(chaine))
+                if (AnalyseurValidChaineService.AnalyseValidChaine(chaine))
                 {
                     lblresult.Text = "Chaîne valide";
                     lblresult.ForeColor = Color.Green;
-                    var res = new DecoupeurChaineService().DecouperEnElements(chaine);
+                    var elements = DecoupeurChaineService.DecouperEnElements(chaine);
+
+                    var res = EvaluerChaineService.EvaluerChaine(elements);
+
+                    lblEvaluer.Text = res;
                 }
                 else
                 {

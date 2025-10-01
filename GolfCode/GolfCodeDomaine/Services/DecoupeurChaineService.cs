@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace GolfCodeDomaine.Services
 {
-    public class DecoupeurChaineService
+    public static class DecoupeurChaineService
     {
          private static readonly Regex _regexElements = new Regex(@"(\d+\.?\d*|[-+*/^()]|sqrt)", RegexOptions.Compiled);
 
@@ -13,7 +13,7 @@ namespace GolfCodeDomaine.Services
         /// </summary>
         /// <param name="expression">Chaîne à découper.</param>
         /// <returns>Liste d'éléments.</returns>
-        public List<string> DecouperEnElements(string expression)
+        public static List<string> DecouperEnElements(string expression)
         {
             var elements = new List<string>();
             var correspondances = _regexElements.Matches(expression);

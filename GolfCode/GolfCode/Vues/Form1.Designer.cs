@@ -32,6 +32,7 @@
             label1 = new Label();
             label2 = new Label();
             lblresult = new Label();
+            lblEvaluer = new Label();
             SuspendLayout();
             // 
             // txtChaine
@@ -67,15 +68,24 @@
             lblresult.AutoSize = true;
             lblresult.Location = new Point(47, 197);
             lblresult.Name = "lblresult";
-            lblresult.Size = new Size(49, 20);
+            lblresult.Size = new Size(0, 20);
             lblresult.TabIndex = 3;
-            lblresult.Text = "Result";
+            // 
+            // lblEvaluer
+            // 
+            lblEvaluer.AutoSize = true;
+            lblEvaluer.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            lblEvaluer.Location = new Point(51, 268);
+            lblEvaluer.Name = "lblEvaluer";
+            lblEvaluer.Size = new Size(0, 35);
+            lblEvaluer.TabIndex = 4;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(829, 397);
+            Controls.Add(lblEvaluer);
             Controls.Add(lblresult);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -95,5 +105,6 @@
         private Label label1;
         private Label label2;
         private Label lblresult;
+        private Label lblEvaluer;
     }
 }

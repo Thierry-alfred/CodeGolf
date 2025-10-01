@@ -3,8 +3,6 @@ namespace TestProject
 {
     public class DecoupeurChaineServiceTest
     {
-        private readonly DecoupeurChaineService _service = new DecoupeurChaineService();
-
         [Fact]
         public void PourUneChaineContenantDesCaratere_OnAppelDecouperElement()
         {
@@ -12,7 +10,7 @@ namespace TestProject
             string chaine = "22 + 3 * sqrt(50) + 2";
 
             //Arrange
-            List<string> resultat = _service.DecouperEnElements(chaine);
+            List<string> resultat = DecoupeurChaineService.DecouperEnElements(chaine);
             
             //Assert
             Assert.Equal(10,     resultat.Count);
