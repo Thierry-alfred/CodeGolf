@@ -15,23 +15,18 @@ namespace GolfCodeDomaine.Services
             string resultat = string.Empty;
             try
             {
-                while (continueExecution)
+                int sqrtcount = chaines.Count(op => op == "sqrt");
+                for (int i = 0; i < sqrtcount; i++)
                 {
-                    int sqrtcount = chaines.Count(op => op == "sqrt");
-                    for (int i = 0; i < sqrtcount; i++)
-                    {
-                        chaines = OperationService.Sqrt(chaines);
-                    }
-
-                    while (chaines.Contains("("))
-                    {
-                        chaines = OperationService.ExecuteParenthese(chaines);
-                    }
-
-                    resultat = OperationService.Excecute(chaines);
-
-                    continueExecution = false;
+                    chaines = OperationService.Sqrt(chaines);
                 }
+
+                while (chaines.Contains("("))
+                {
+                    chaines = OperationService.ExecuteParenthese(chaines);
+                }
+
+                resultat = OperationService.Excecute(chaines);
                 return resultat;
             }
             catch

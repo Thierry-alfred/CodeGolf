@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,17 +11,17 @@ namespace GolfCodeDomaine.Services
     {
         public static List<string> Addition(List<string> chaines)
         {
+            chaines = chaines.Select(c => c.Replace(',', '.')).ToList();
             int index = chaines.IndexOf("+");
-
-            if (index == 0 && chaines.Count >= 2 && double.TryParse(chaines[1], out double valeur))
+            if (index == 0 && chaines.Count >= 2 && double.TryParse(chaines[1], NumberStyles.Any, CultureInfo.InvariantCulture, out double valeur))
             {
                 chaines.RemoveAt(0);
                 return chaines;
             }
 
             if (index - 1 >= 0 && index + 1 < chaines.Count &&
-                double.TryParse(chaines[index - 1], out double valeur1) &&
-                double.TryParse(chaines[index + 1], out double valeur2))
+                double.TryParse(chaines[index - 1], NumberStyles.Any, CultureInfo.InvariantCulture, out double valeur1) &&
+                double.TryParse(chaines[index + 1], NumberStyles.Any, CultureInfo.InvariantCulture, out double valeur2))
             {
                 if (index - 2 >= 0 && chaines[index - 2] == "-")
                     valeur1 = -valeur1;
@@ -48,10 +49,10 @@ namespace GolfCodeDomaine.Services
         {
             int index = chaines.IndexOf("*");
             if (index - 1 >= 0 && index + 1 < chaines.Count &&
-                double.TryParse(chaines[index - 1], out double valeur1) &&
-                double.TryParse(chaines[index + 1], out double valeur2))
+                double.TryParse(chaines[index - 1], NumberStyles.Any, CultureInfo.InvariantCulture, out double valeur1) &&
+                double.TryParse(chaines[index + 1], NumberStyles.Any, CultureInfo.InvariantCulture, out double valeur2))
             {
-                double multiplication = valeur1 * valeur2;
+                double multiplication = Math.Round(valeur1 * valeur2,2);
                 chaines[index - 1] = multiplication.ToString();
                 chaines.RemoveAt(index);
                 chaines.RemoveAt(index);
@@ -67,8 +68,8 @@ namespace GolfCodeDomaine.Services
         {
             int index = chaines.IndexOf("^");
             if (index - 1 >= 0 && index + 1 < chaines.Count &&
-                double.TryParse(chaines[index - 1], out double baseValue) &&
-                double.TryParse(chaines[index + 1], out double exponent))
+                double.TryParse(chaines[index - 1], NumberStyles.Any, CultureInfo.InvariantCulture, out double baseValue) &&
+                double.TryParse(chaines[index + 1], NumberStyles.Any, CultureInfo.InvariantCulture, out double exponent))
             {
                 double puissance = Math.Pow(baseValue, exponent);
                 chaines[index - 1] = puissance.ToString();
@@ -85,7 +86,7 @@ namespace GolfCodeDomaine.Services
         public static List<string> Sqrt(List<string> chaines)
         {
             int index = chaines.IndexOf("sqrt");
-            if (index + 2 < chaines.Count && chaines[index + 1] == "(" && double.TryParse(chaines[index + 2], out double valeur))
+            if (index + 2 < chaines.Count && chaines[index + 1] == "(" && double.TryParse(chaines[index + 2], NumberStyles.Any, CultureInfo.InvariantCulture, out double valeur))
             {
                 double racine = Math.Sqrt(valeur);
                 chaines[index] = racine.ToString();
@@ -105,10 +106,11 @@ namespace GolfCodeDomaine.Services
 
         public static List<string> Division(List<string> chaines)
         {
+            chaines = chaines.Select(c => c.Replace(',', '.')).ToList();
             int index = chaines.IndexOf("/");
             if (index - 1 >= 0 && index + 1 < chaines.Count &&
-                double.TryParse(chaines[index - 1], out double valeur1) &&
-                double.TryParse(chaines[index + 1], out double valeur2))
+                double.TryParse(chaines[index - 1], NumberStyles.Any, CultureInfo.InvariantCulture, out double valeur1) &&
+                double.TryParse(chaines[index + 1], NumberStyles.Any, CultureInfo.InvariantCulture, out double valeur2))
             {
                 if (valeur2 == 0)
                 {
@@ -128,16 +130,17 @@ namespace GolfCodeDomaine.Services
 
         public static List<string> Soustraction(List<string> chaines)
         {
+            chaines = chaines.Select(c => c.Replace(',', '.')).ToList();
             int index = chaines.IndexOf("-");
-            if (index == 0 && chaines.Count >= 2 && double.TryParse(chaines[1], out double valeurNeg))
+            if (index == 0 && chaines.Count >= 2 && double.TryParse(chaines[1], NumberStyles.Any, CultureInfo.InvariantCulture, out double valeurNeg))
             {
                 chaines[0] = (-valeurNeg).ToString(); 
                 chaines.RemoveAt(1);                  
                 return chaines;         
             }
             if (index - 1 >= 0 && index + 1 < chaines.Count &&
-                double.TryParse(chaines[index - 1], out double valeur1) &&
-                double.TryParse(chaines[index + 1], out double valeur2))
+                double.TryParse(chaines[index - 1], NumberStyles.Any, CultureInfo.InvariantCulture, out double valeur1) &&
+                double.TryParse(chaines[index + 1], NumberStyles.Any, CultureInfo.InvariantCulture, out double valeur2))
             {
                 double soustraction = valeur1 - valeur2;
                 chaines[index - 1] = soustraction.ToString();
